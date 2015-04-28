@@ -1,6 +1,5 @@
 var http = require('http'),
        fs = require('fs'),
-       async = require('async'),
        d = require('domain').create(),
        path = require('path'),
        util = require('util'),
