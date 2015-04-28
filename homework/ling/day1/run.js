@@ -34,11 +34,13 @@ function run(page){
 	console.log("============================");
 	console.log("=====开始抓第", page, "页=====");
 	http.get(getURL(page), function (res) {
-		var contentHtml = new Buffer([]);
+		var buffers = [], size = 0;
 		res.on('data', function(chunk) {
-			contentHtml += chunk;
+			buffers.push(chunk);
+			size += chunk.length;
 		});
 		res.on('end', function() {
+			var contentHtml = Buffer.concat(buffers, size);
 			e.emit('finishGetHome', contentHtml);
 		});
 	});
@@ -53,11 +55,13 @@ e.on('finishGetHome', function (html) {
 		var url = _u && _u[1];
 		if(url){
 			http.get(BASEURL + url, function(res){
-				var _cont = new Buffer([]);
+				var buffers = [], size = 0;
 				res.on('data', function(chunk) {
-					_cont += chunk;
+					buffers.push(chunk);
+					size += chunk.length;
 				});
 				res.on('end', function() {
+					var _cont = Buffer.concat(buffers, size);
 					e.emit('finishGetChild', _cont);
 				});
 			});
