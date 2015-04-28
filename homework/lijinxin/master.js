@@ -24,16 +24,15 @@ d.run(function(){
 	os.cpus().forEach(function(){
 		var worker = c_p.fork( path.join(__dirname, 'worker.js') );
 		worker.on('message', function(res){
-			if( res.success){
-				if(index > 0 && index++ <= arg[1])
-					worker.send({'index' : index});
-				else if(errors.length > 0)
-					worker.send({'index' : errors.shift()});
-
-			}else{
+			if( !res.success ){
 				console.log('第', res.index, '个出现错误!!!!');
 				erros.push(res.index);
 			}
+
+			if(index > 0 && ++index <= arg[1])
+				worker.send({'index' : index});
+			else if(errors.length > 0)
+				worker.send({'index' : errors.shift()});
 		});
 
 		worker.send({'index' : index++});
