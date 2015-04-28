@@ -12,7 +12,7 @@ d.on('error', function(err){
 });
 
 d.run(function(){
-	var args = [process.argv[2] || 1, process.argv[3]  || 91];
+	var args = [process.argv[3] || 1, process.argv[4]  || 91];
 	if(args[0] > args[1]) args.reverse();
 	var index = args[0];
 	var errors = []; // 出错的序号
