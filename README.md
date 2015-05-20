@@ -22,4 +22,13 @@ homework
 ...
 ```
 
-  
+### D-Day 2
+超大文件处理
+
+使用node.js 处理提供的homework2文件夹的log文件
+得到所有试图通过admin或者root用户登录的用户ip地址
+
+
+
+
+
